@@ -1,3 +1,4 @@
+<%@page import="bll.AccountBLL"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -5,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Products</title>
+        <title>Danh sách sản phẩm</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
@@ -23,40 +24,65 @@
         <jsp:include page = "reusejsp/header.jsp"></jsp:include>
 
             <div class="container">	
-                <div class="women-product">
-                    <div class=" w_content">
-                        <div class="women">
-                            <span>Số kết quả tìm kiếm :</span> </h4></a>
+                <div class="shoes-grid">
+                <jsp:include page = "reusejsp/note.jsp"></jsp:include>
+                <c:forEach var="product" items="${productList}">
+                    <img src="${initParam.imgProductPath}${product.getAnh()}" width="40%" align="left" class="img-responsive watch-right" alt=""/>
 
-                            <div class="clearfix"> </div>	
-                        </div>
+                    <div align="left" style="width:100%; ">
+                        <h4>MSSP: ${product.getMSSP()}</h4>
+                        <br>
+                        <h4>TÊN SẢN PHẨM: ${product.getTenSanPham()}</h4>
+                        <br>
+                        <h4>LOẠI: ${product.getLoai()}</h4>
+                        <br>
+                        <h3>GIÁ: <b>${product.getGia()}VNĐ</b></h3>
+                        <br>
+                        <h4>SỐ LƯỢNG CÒN: ${product.getSoLuong()}</h4>
+                        <br>
+                        <h4>NGÀY SẢN XUẤT: ${product.getNgaySX()}</h4>
+                        <br>
+                        <h4>HÃNG: ${product.getHang()}</h4>
+                        <br>
+                        <h4>QUỐC GIA: ${product.getQuocGia()}</h4>
+                        <br>
+                        <h4>MÔ TẢ: ${product.getMoTa()}</h4>
+                        <br>
                     </div>
-                    <!-- grids_of_4 -->
-                    <div class="grid-product">
-                        <jsp:include page = "reusejsp/note.jsp"></jsp:include>
-                        <c:forEach var="product" items="${productList}">
-                            <div class="  product-grid">
-                                <div class="content_box"><a href="single.html">
-                                        <div class="left-grid-view grid-view-left">
-                                            <img src="${initParam.imgProductPath}${product.getAnh()}" width="179" height="250" class="img-responsive watch-right" alt=""/>
-                                            <div class="mask">
-                                                <div class="info">Quick View</div>
-                                            </div>
-                                    </a>
-                                </div>
-                                <h4><b><a href="#">TÊN SẢN PHẨM: ${product.getTenSanPham()}</a></b></h4>
-                                <h4><b><font color="blue">GIÁ: ${product.getGia()}đ</font></b></h4>
-                                <h4><b>SỐ LƯỢNG CÒN: ${product.getSoLuong()}</b></h4>
-                            </div>
-                            </div>
-                        </c:forEach>
-                        <div class="clearfix"> </div>
+                    <div class="clearfix"> </div>
+                    <%
+                        String tenTaiKhoan=null,matKhau=null;
+                        Cookie ck[]=request.getCookies();
+                        if (ck!=null)
+                            for (Cookie c:ck)
+                                if ("tenTaiKhoan".equals(c.getName()))
+                                    tenTaiKhoan=c.getValue();
+                                else if ("matKhau".equals(c.getName()))
+                                    matKhau=c.getValue();
+                        AccountBLL accountBLL=new AccountBLL();
+                        if (tenTaiKhoan!=null && matKhau!=null && accountBLL.checkDangNhap(tenTaiKhoan, matKhau)==1) {
+                            
+                    %>
+                    <div>
+                        <form action="AddToCartServlet?MSSP=${product.getMSSP()}&soLuongCon=${product.getSoLuong()}" method="post">
+                            <h4>Nhập số lượng
+                                <input type="text" name="soLuong"> 
+                                <input type="submit" value="Thêm vào giỏ hàng">
+                                <div class="clearfix"> </div>
+                            </h4>
+                        </form>
                     </div>
-                </div>
-            <jsp:include page = "reusejsp/leftmenu.jsp"></jsp:include> 
+                    <% } else { %>
+                    <h4><font color="red">Vui lòng <a href="login.jsp"><font color="blue">đăng nhập</font></a> để mua hàng</font></h4>
+                    <% } %>
+                </c:forEach>
+                    <div class="clearfix"> </div>
             </div>
-            <!---->
+        
+        <jsp:include page = "reusejsp/leftmenu.jsp"></jsp:include> 
+        </div>
+        <!---->
 
-        <jsp:include page = "reusejsp/footer.jsp"></jsp:include>
-    </body>
+    <jsp:include page = "reusejsp/footer.jsp"></jsp:include>
+</body>
 </html>

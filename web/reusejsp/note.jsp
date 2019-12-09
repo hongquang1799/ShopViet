@@ -1,3 +1,4 @@
+<br>
 <%
     String thongBao = (String) (request.getAttribute("thongBao"));
     if (thongBao != null) {

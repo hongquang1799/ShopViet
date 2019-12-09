@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Đăng nhập</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
@@ -33,7 +33,7 @@
                             </div>
                             <div>
                                 <span>Mật khẩu<label>*</label></span>
-                                <input type="text" name="matKhau"> 
+                                <input type="password" name="matKhau"> 
                             </div>
                             <div><a class="forgot" href="#">Quên mật khẩu?</a></div>
                             <input type="submit" value="Đăng nhập">

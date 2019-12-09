@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user1
  */
-public class ProductSearchServlet extends HttpServlet {
+public class ProductViewServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,14 +30,12 @@ public class ProductSearchServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         
         ProductBLL productBLL = new ProductBLL();
-        String loaiSanPham=request.getParameter("loaiSanPham");
-        List<Product> productList = productBLL.timKiemSanPham(loaiSanPham);
+        int MSSP=Integer.parseInt(request.getParameter("MSSP"));
+        List<Product> productList = productBLL.layThongTinSanPham(MSSP);
         request.setAttribute("productList",productList);
-        if ("All".equals(loaiSanPham))
-            request.setAttribute("thongBao", "Số sản phẩm hiện có: "+Integer.toString(productList.size()));
-        else
-            request.setAttribute("thongBao", "Số sản phẩm "+loaiSanPham+" tìm được: "+Integer.toString(productList.size()));
-        RequestDispatcher rd = request.getRequestDispatcher("productsearch.jsp");
+        if (productList.size()==0)
+            request.setAttribute("thongBao", "Không tìm thấy sản phẩm");
+        RequestDispatcher rd = request.getRequestDispatcher("productview.jsp");
         rd.forward(request, response);
     }
 

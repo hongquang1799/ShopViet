@@ -299,8 +299,8 @@
                         <div class="clearfix"> </div>
                     </div>
                     <div class="clearfix"> </div>
-                </div>   
-                <jsp:include page = "reusejsp/leftmenu.jsp"></jsp:include>        	         
+                    </div>   
+            <jsp:include page = "reusejsp/leftmenu.jsp"></jsp:include>        	         
             </div>
         <jsp:include page = "reusejsp/footer.jsp"></jsp:include>
     </body>

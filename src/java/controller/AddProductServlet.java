@@ -6,7 +6,9 @@
 package controller;
 
 import bll.AccountBLL;
+import bll.ProductBLL;
 import entity.Account;
+import entity.Product;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,13 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user1
  */
-public class RegisterServlet extends HttpServlet {
+public class AddProductServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         AccountBLL accountBLL = new AccountBLL();
+        ProductBLL productBLL = new ProductBLL();
         String tenTaiKhoan = null, matKhau = null;
         Cookie ck[] = request.getCookies();
         if (ck != null) {
@@ -37,38 +40,36 @@ public class RegisterServlet extends HttpServlet {
                 }
             }
         }
-        if (tenTaiKhoan != null && matKhau != null && accountBLL.checkDangNhap(tenTaiKhoan, matKhau) == 1) {
-            request.setAttribute("thongBao", "Bạn đã có tài khoản");
+        if (tenTaiKhoan == null || matKhau == null) {
+            request.setAttribute("thongBao", "Bạn chưa đăng nhập");
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-        Account acc = new Account();
-        acc.setHoTen(request.getParameter("hoTen"));
-        acc.setNgaySinh(request.getParameter("ngaySinh"));
-        acc.setDiaChi(request.getParameter("diaChi"));
-        acc.setSDT(request.getParameter("SDT"));
-        acc.setEmail(request.getParameter("email"));
-        acc.setCMND(request.getParameter("CMND"));
-        acc.setTenTaiKhoan(request.getParameter("tenTaiKhoan"));
-        acc.setMatKhau(request.getParameter("matKhau1"));
-        acc.setLoai("Khách hàng");
-        request.setAttribute("account", acc);
-        request.setAttribute("thongBao", "Failure");
-        
-        if (!acc.getMatKhau().equals( request.getParameter("matKhau2"))) {
-            request.setAttribute("thongBao", "Mật khẩu xác nhận không đúng");
-            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+        else if (accountBLL.checkDangNhap(tenTaiKhoan, matKhau) == 0) {
+            request.setAttribute("thongBao", "Tài khoản đăng nhập hoặc mật khẩu không đúng");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-        else if (accountBLL.checkTenTaiKhoan(acc.getTenTaiKhoan())==1) {
-            request.setAttribute("thongBao", "Tài khoản đã tồn tại");
-            RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
-            rd.forward(request,response);
+        else if (!accountBLL.layThongTinTaiKhoan(tenTaiKhoan).get(0).getLoai().equals("Quản trị viên")) {
+            request.setAttribute("thongBao", "Bạn không phải quản trị viên");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
         }
         else {
-            accountBLL.taoTaiKhoan(acc);
-            request.setAttribute("thongBao", "Đã thêm tài khoản thành công. Hãy đăng nhập");
-            RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+            Product p=new Product();
+            p.setTenSanPham(request.getParameter("tenSanPham"));
+            p.setLoai(request.getParameter("loai"));            
+            p.setGia(Integer.parseInt(request.getParameter("gia")));
+            p.setSoLuong(Integer.parseInt(request.getParameter("soLuong")));            
+            p.setNgaySX(request.getParameter("ngaySX"));
+            p.setHang(request.getParameter("hang"));    
+            p.setQuocGia(request.getParameter("quocGia"));
+            p.setMoTa(request.getParameter("moTa"));
+
+            
+            productBLL.themSanPham(p);
+            request.setAttribute("thongBao", "Đã thêm sản phẩm thành công");
+            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
             rd.forward(request,response);
         }
     }

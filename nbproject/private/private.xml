@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/ReuseCode.java</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/bll/ProductBLL.java</file>
             <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/bll/AccountBLL.java</file>
-            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/login.jsp</file>
-            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/index.jsp</file>
-            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/controller/RegisterServlet.java</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/controller/AddProductServlet.java</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/src/java/controller/ProductViewServlet.java</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/addproduct.jsp</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/admin.jsp</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/productFix.jsp</file>
+            <file>file:/C:/Users/user1/Documents/NetBeansProjects/ShopViet/web/productview.jsp</file>
         </group>
     </open-files>
 </project-private>

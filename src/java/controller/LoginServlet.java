@@ -22,24 +22,41 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccountBLL accountBLL=new AccountBLL();
-        String tenTaiKhoan=request.getParameter("tenTaiKhoan");
-        String matKhau=request.getParameter("matKhau");
-        request.setAttribute("thongBao", "Failure");
-        
-        if (accountBLL.checkDangNhap(tenTaiKhoan,matKhau)==0) {
-            request.setAttribute("thongBao", "Tên tài khoản hoặc mật khẩu không đúng");
-            RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
-            rd.forward(request,response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        AccountBLL accountBLL = new AccountBLL();
+        String tenTaiKhoan = null, matKhau = null;
+        Cookie ck[] = request.getCookies();
+        if (ck != null) {
+            for (Cookie c : ck) {
+                if ("tenTaiKhoan".equals(c.getName())) {
+                    tenTaiKhoan = c.getValue();
+                } else if ("matKhau".equals(c.getName())) {
+                    matKhau = c.getValue();
+                }
+            }
         }
-        else {
-            Cookie ck = new Cookie("tenTaiKhoan", tenTaiKhoan);
-            response.addCookie(ck);
-            ck = new Cookie("matKhau", matKhau);
-            response.addCookie(ck);
-            request.setAttribute("thongBao", "Đăng nhập thành công");
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-            rd.forward(request,response);
+        if (tenTaiKhoan != null && matKhau != null && accountBLL.checkDangNhap(tenTaiKhoan, matKhau) == 1) {
+            request.setAttribute("thongBao", "Đăng nhập thành công, vui lòng tải lại trang web");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        }
+        tenTaiKhoan = request.getParameter("tenTaiKhoan");
+        matKhau = request.getParameter("matKhau");
+        request.setAttribute("thongBao", "Failure");
+
+        if (accountBLL.checkDangNhap(tenTaiKhoan, matKhau) == 0) {
+            request.setAttribute("thongBao", "Tên tài khoản hoặc mật khẩu không đúng");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        } else {
+            Cookie ttk = new Cookie("tenTaiKhoan", tenTaiKhoan);
+            response.addCookie(ttk);
+            Cookie mk = new Cookie("matKhau", matKhau);
+            response.addCookie(mk);
+            request.setAttribute("thongBao", "Đăng nhập thành công, vui lòng tải lại trang web");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
         }
     }
 

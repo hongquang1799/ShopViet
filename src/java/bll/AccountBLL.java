@@ -86,4 +86,36 @@ public class AccountBLL {
         }
         return 0;
     }
+    
+    public List<Account> layThongTinTaiKhoan(String tenTaiKhoan) {
+        try {
+            Context initContext = new InitialContext();
+            Context envContext=(Context)initContext.lookup("java:comp/env");
+            DataSource ds=(DataSource) envContext.lookup("jdbc/WEBBANHANG");
+            Connection conn = ds.getConnection();
+            Statement sttm = conn.createStatement();
+            String sql = "Select * from NGUOIDUNG where TENTAIKHOAN=N'"+tenTaiKhoan+"'";
+            ResultSet rs = sttm.executeQuery(sql);
+            ArrayList<Account> prods = new ArrayList<>();
+            while (rs.next()) {
+                Account p = new Account();
+                p.setTenTaiKhoan(rs.getString("TENTAIKHOAN"));
+                p.setMatKhau(null);
+                p.setHoTen(rs.getString("HOTEN"));
+                p.setNgaySinh(rs.getString("NGAYSINH"));
+                p.setDiaChi(rs.getString("DIACHI"));                
+                p.setSDT(rs.getString("SDT"));              
+                p.setEmail(rs.getString("EMAIL"));              
+                p.setCMND(rs.getString("CMND"));              
+                p.setNgayTao(rs.getString("NGAYTAO"));              
+                p.setLoai(rs.getString("LOAI"));
+                
+                prods.add(p);
+            }
+            return prods;
+        } catch (SQLException | NamingException ex) {
+            System.err.println(ex);
+        }
+        return null;
+    }
 }
