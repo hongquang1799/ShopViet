@@ -26,7 +26,7 @@ public class ProductBLL {
             DataSource ds=(DataSource) envContext.lookup("jdbc/WEBBANHANG");
             Connection conn = ds.getConnection();
             Statement sttm = conn.createStatement();
-            String sql = "Select * from SANPHAM";
+            String sql = "Select * from SANPHAM order by NGAYTHEM";
             ResultSet rs = sttm.executeQuery(sql);
             ArrayList<Product> prods = new ArrayList<>();
             while (rs.next() && number-->0) {
@@ -109,25 +109,20 @@ public class ProductBLL {
                 p.setLoai(rs.getString("LOAI"));
                 p.setGia(rs.getInt("GIA"));
                 p.setSoLuong(rs.getInt("SOLUONG"));
-                if (rs.getString("NGAYSX")!=null)
-                    p.setNgaySX(rs.getString("NGAYSX"));
-                else
+                p.setNgaySX(rs.getString("NGAYSX"));
+                p.setHang(rs.getString("HANG"));
+                p.setQuocGia(rs.getString("QUOCGIA"));
+                p.setMoTa(rs.getString("MOTA"));
+                p.setAnh(rs.getString("ANH"));
+                if (rs.getString("NGAYSX")==null)
                     p.setNgaySX("Không rõ");
-                if (rs.getString("HANG")!=null)
-                    p.setHang(rs.getString("HANG"));
-                else
+                if (rs.getString("HANG")==null)
                     p.setHang("Không rõ");
-                if (rs.getString("QUOCGIA")!=null)
-                    p.setQuocGia(rs.getString("QUOCGIA"));
-                else
+                if (rs.getString("QUOCGIA")==null)
                     p.setQuocGia("Không rõ");
-                if (rs.getString("MOTA")!=null)
-                    p.setMoTa(rs.getString("MOTA"));
-                else
+                if (rs.getString("MOTA")==null)
                     p.setMoTa("Không có");
-                if (rs.getString("ANH")!=null)
-                    p.setAnh(rs.getString("ANH"));
-                else
+                if (rs.getString("ANH")==null)
                     p.setAnh("noimg.jpg");
                 
                 prods.add(p);
@@ -137,6 +132,31 @@ public class ProductBLL {
             System.err.println(ex);
         }
         return null;
+    }
+    
+    public void suaThongTinSanPham(Product p) {
+        try {
+            Context initContext = new InitialContext();
+            Context envContext=(Context)initContext.lookup("java:comp/env");
+            DataSource ds=(DataSource) envContext.lookup("jdbc/WEBBANHANG");
+            Connection conn = ds.getConnection();
+            Statement sttm = conn.createStatement();
+            String sql = "update SANPHAM set TENSANPHAM=N'"+
+                    p.getTenSanPham()+"',LOAI=N'"+
+                    p.getLoai()+"',GIA="+
+                    p.getGia()+",SOLUONG="+
+                    p.getSoLuong()+",NGAYSX='"+
+                    p.getNgaySX()+"',HANG=N'"+
+                    p.getHang()+"',QUOCGIA=N'"+
+                    p.getQuocGia()+"',MOTA=N'"+
+                    p.getMoTa()+"',ANH=N'"+
+                    p.getAnh()+"' where MSSP="+
+                    p.getMSSP();
+            ResultSet rs = sttm.executeQuery(sql);
+            
+        } catch (SQLException | NamingException ex) {
+            System.err.println(ex);
+        }
     }
     
     public void themSanPham(Product p) {
@@ -162,4 +182,6 @@ public class ProductBLL {
             System.err.println(ex);
         }
     }
+    
+    
 }

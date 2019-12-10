@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Sửa sản phẩm</title>
+        <title>Sửa tài khoản (Admin)</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
@@ -25,51 +25,56 @@
                 <div class="account_grid">
                     <jsp:include page = "reusejsp/note.jsp"></jsp:include>
                     <div class=" login-right">
-                        <h3>NHẬP THÔNG TIN SẢN PHẨM</h3>
-                        <form action="GetDataFixProductServlet" method="get">
+                        <h3>NHẬP THÔNG TIN TÀI KHOẢN</h3>
+                        <form action="GetDataFixAccountServlet" method="get">
                             <div>
-                                <span>Nhập MSSP<label>*</label></span>
-                                <input type="text" name="MSSP" value="${p.getMSSP()}">
+                                <span>Nhập tên tài khoản<label></label></span>
+                                <input type="text" name="tenTaiKhoan" value="${acc.getTenTaiKhoan()}">
                             </div>                            
-                            <input type="submit" value="Lấy thông tin sản phẩm">
+                            <input type="submit" value="Lấy thông tài khoản">
                         </form>
-                        <form action="FixProductServlet" method="post">
+                        <form action="FixAccountServlet" method="post">
                             <div>
-                                <span>MSSP<label>*</label></span>
-                                <input type="text" name="MSSP"  value="${p.getMSSP()}" readonly> 
+                                <span>Tên tài khoản<label></label></span>
+                                <input type="text" name="tenTaiKhoan"  value="${acc.getTenTaiKhoan()}" readonly> 
                             </div>
                             <div>
-                                <span>Tên sản phẩm<label>*</label></span>
-                                <input type="text" name="tenSanPham"  value="${p.getTenSanPham()}"> 
+                                <span>Mật khẩu<label></label></span>
+                                <input type="text" name="matKhau"  value="${acc.getMatKhau()}"> 
                             </div>
                             <div>
-                                <span>Loại<label>*</label></span>
-                                <input type="text" name="loai"  value="${p.getLoai()}"> 
+                                <span>Họ tên<label></label></span>
+                                <input type="text" name="hoTen"  value="${acc.getHoTen()}"> 
                             </div>
                             <div>
-                                <span>Giá<label>*</label></span>
-                                <input type="text" name="gia"  value="${p.getGia()}"> 
+                                <span>Ngày sinh<label></label></span>
+                                <input type="date" name="ngaySinh"  value="${acc.getNgaySinh()}"> 
                             </div>
                             <div>
-                                <span>Số lượng<label>*</label></span>
-                                <input type="text" name="soLuong"  value="${p.getSoLuong()}">                               
+                                <span>Địa chỉ<label></label></span>
+                                <input type="text" name="diaChi"  value="${acc.getDiaChi()}"> 
                             </div>
                             <div>
-                                <span>Ngày sản xuất<label>*</label></span>
-                                <input type="date" name="ngaySX"  value="${p.getNgaySX()}"> 
+                                <span>SĐT<label></label></span>
+                                <input type="text" name="SDT"  value="${acc.getSDT()}"> 
                             </div>
                             <div>
-                                <span>Hãng<label>*</label></span>
-                                <input type="text" name="hang"  value="${p.getHang()}"> 
+                                <span>Email<label></label></span>
+                                <input type="text" name="email"  value="${acc.getEmail()}"> 
                             </div>
                             <div>
-                                <span>Quốc gia<label>*</label></span>
-                                <input type="text" name="quocGia"  value="${p.getQuocGia()}"> 
+                                <span>CMND<label></label></span>
+                                <input type="text" name="CMND"  value="${acc.getCMND()}"> 
                             </div>
                             <div>
-                                <span>Mô tả</span>
-                                <input type="text" name="moTa"  value="${p.getMoTa()}"> 
+                                <span>Ngày tạo<label></label></span>
+                                <input type="date" name="ngayTao"  value="${acc.getNgayTao()}" readonly> 
                             </div>
+                            <div>
+                                <span>Loại tài khoản<label></label></span>
+                                <input type="text" name="loai"  value="${acc.getLoai()}"> 
+                            </div>
+                            
                             <input type="submit" value="Thay đổi">
                         </form>
                     </div>	

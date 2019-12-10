@@ -110,6 +110,7 @@ public class AccountBLL {
                 p.setNgayTao(rs.getString("NGAYTAO"));              
                 p.setLoai(rs.getString("LOAI"));
                 
+                
                 prods.add(p);
             }
             return prods;
@@ -117,5 +118,32 @@ public class AccountBLL {
             System.err.println(ex);
         }
         return null;
+    }
+    
+    public void suaThongTinTaiKhoan(Account acc) {
+        try {
+            Context initContext = new InitialContext();
+            Context envContext=(Context)initContext.lookup("java:comp/env");
+            DataSource ds=(DataSource) envContext.lookup("jdbc/WEBBANHANG");
+            Connection conn = ds.getConnection();
+            Statement sttm = conn.createStatement();
+            String sql = "update NGUOIDUNG set TENTAIKHOAN=N'"
+                    + acc.getTenTaiKhoan();
+            if (!"".equals(acc.getMatKhau()))
+                sql=sql+"',MATKHAU=N'"+ acc.getMatKhau();
+            sql=sql+"',HOTEN=N'"
+                    + acc.getHoTen()+"',NGAYSINH='"
+                    + acc.getNgaySinh()+"',DIACHI=N'"
+                    + acc.getDiaChi()+"',SDT='"
+                    + acc.getSDT()+"',EMAIL=N'"
+                    + acc.getEmail()+"',CMND='"
+                    + acc.getCMND()+"',LOAI=N'"
+                    + acc.getLoai()+"' where TENTAIKHOAN=N'"
+                    + acc.getTenTaiKhoan()+"'";                                    
+            ResultSet rs = sttm.executeQuery(sql);
+            
+        } catch (SQLException | NamingException ex) {
+            System.err.println(ex);
+        }
     }
 }

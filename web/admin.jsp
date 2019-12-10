@@ -55,10 +55,8 @@
                 <jsp:include page = "reusejsp/note.jsp"></jsp:include>
                 <h3><b><font color="#F97E76">CHỌN CHỨC NĂNG</font></b></h3>
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="addproduct.jsp">Thêm sản phẩm</a></h4>        
-                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chỉnh sửa sản phẩm</h4>                    
-                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xem thông tin khách hàng</h4>   
-                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sửa mật khẩu tài khoản khách hàng</h4>   
-                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xóa tài khoản khách hàng</h4>   
+                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="productfix.jsp">Xem/Sửa sản phẩm</a></h4>                    
+                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="accountfix.jsp">Xem/Sửa thông tin khách hàng</a></h4> 
                 </div>
 
             <jsp:include page = "reusejsp/leftmenu.jsp"></jsp:include> 

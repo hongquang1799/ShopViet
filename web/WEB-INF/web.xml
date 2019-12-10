@@ -48,6 +48,22 @@
         <servlet-name>AddProductServlet</servlet-name>
         <servlet-class>controller.AddProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetDataFixProductServlet</servlet-name>
+        <servlet-class>controller.GetDataFixProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FixProductServlet</servlet-name>
+        <servlet-class>controller.FixProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetDataFixAccountServlet</servlet-name>
+        <servlet-class>controller.GetDataFixAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FixAccountServlet</servlet-name>
+        <servlet-class>controller.FixAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductBLL</servlet-name>
         <url-pattern>/ProductBLL</url-pattern>
@@ -95,6 +111,22 @@
     <servlet-mapping>
         <servlet-name>AddProductServlet</servlet-name>
         <url-pattern>/AddProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDataFixProductServlet</servlet-name>
+        <url-pattern>/GetDataFixProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FixProductServlet</servlet-name>
+        <url-pattern>/FixProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDataFixAccountServlet</servlet-name>
+        <url-pattern>/GetDataFixAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FixAccountServlet</servlet-name>
+        <url-pattern>/FixAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

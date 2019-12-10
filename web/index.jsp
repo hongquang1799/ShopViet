@@ -1,3 +1,6 @@
+<%@page import="entity.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="bll.ProductBLL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,20 +26,23 @@
                 <div class="shoes-grid">
                     
                     <jsp:include page = "reusejsp/note.jsp"></jsp:include>
-                    <a href="single.html">
+                        <%
+                            ProductBLL productBLL=new ProductBLL();
+                            List<Product> plist=productBLL.laySanPhamMoi(6);
+                        %>
                         <div class="wrap-in">
                             <div class="wmuSlider example1 slide-grid">		 
                                 <div class="wmuSliderWrapper">		  
                                     <article style="position: absolute; width: 100%; opacity: 0;">					
                                         <div class="banner-matter">
                                             <div class="col-md-5 banner-bag">
-                                                <img class="img-responsive " src="images/bag.jpg" alt=" " />
+                                                <img class="img-responsive " src="${initParam.imgProductPath}<%=plist.get(0).getAnh()%>" alt=" " />
                                             </div>
                                             <div class="col-md-7 banner-off">							
-                                                <h2>FLAT 50% 0FF</h2>
-                                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-                                                <span class="on-get">GET NOW</span>
+                                                <h2><%=plist.get(0).getGia()%>VNĐ</h2>
+                                                <label><%=plist.get(0).getTenSanPham()%></label>
+                                                <p><%=plist.get(0).getMoTa()%></p>					
+                                                <a href="ProductViewServlet?MSSP=<%=plist.get(0).getMSSP()%>"><span class="on-get">Chi tiết</span></a>
                                             </div>
 
                                             <div class="clearfix"> </div>
@@ -46,13 +52,13 @@
                                     <article style="position: absolute; width: 100%; opacity: 0;">					
                                         <div class="banner-matter">
                                             <div class="col-md-5 banner-bag">
-                                                <img class="img-responsive " src="images/bag1.jpg" alt=" " />
+                                                <img class="img-responsive " src="${initParam.imgProductPath}<%=plist.get(1).getAnh()%>" alt=" " />
                                             </div>
                                             <div class="col-md-7 banner-off">							
-                                                <h2>FLAT 50% 0FF</h2>
-                                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-                                                <span class="on-get">GET NOW</span>
+                                                <h2><%=plist.get(1).getGia()%>VNĐ</h2>
+                                                <label><%=plist.get(1).getTenSanPham()%></label>
+                                                <p><%=plist.get(1).getMoTa()%></p>					
+                                                <a href="ProductViewServlet?MSSP=<%=plist.get(1).getMSSP()%>"><span class="on-get">Chi tiết</span></a>
                                             </div>
 
                                             <div class="clearfix"> </div>
@@ -62,13 +68,13 @@
                                     <article style="position: absolute; width: 100%; opacity: 0;">					
                                         <div class="banner-matter">
                                             <div class="col-md-5 banner-bag">
-                                                <img class="img-responsive " src="images/bag.jpg" alt=" " />
+                                                <img class="img-responsive " src="${initParam.imgProductPath}<%=plist.get(2).getAnh()%>" alt=" " />
                                             </div>
                                             <div class="col-md-7 banner-off">							
-                                                <h2>FLAT 50% 0FF</h2>
-                                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-                                                <span class="on-get">GET NOW</span>
+                                                <h2><%=plist.get(2).getGia()%>VNĐ</h2>
+                                                <label><%=plist.get(2).getTenSanPham()%></label>
+                                                <p><%=plist.get(2).getMoTa()%></p>					
+                                                <a href="ProductViewServlet?MSSP=<%=plist.get(2).getMSSP()%>"><span class="on-get">Chi tiết</span></a>
                                             </div>
 
                                             <div class="clearfix"> </div>
@@ -89,209 +95,52 @@
                                 </script> 
                             </div>
                         </div>
-                    </a>
                     <!---->
-                    <div class="shoes-grid-left">
-                        <a href="single.html">				 
-                            <div class="col-md-6 con-sed-grid">
-
-                                <div class=" elit-grid"> 
-
-                                    <h4>consectetur  elit</h4>
-                                    <label>FOR ALL PURCHASE VALUE</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
-                                    <span class="on-get">GET NOW</span>						
-                                </div>						
-                                <img class="img-responsive shoe-left" src="images/sh.jpg" alt=" " />
-
-                                <div class="clearfix"> </div>
-
-                            </div>
-                        </a>
-                        <a href="single.html">	
-                            <div class="col-md-6 con-sed-grid sed-left-top">
-                                <div class=" elit-grid"> 
-                                    <h4>consectetur  elit</h4>
-                                    <label>FOR ALL PURCHASE VALUE</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
-                                    <span class="on-get">GET NOW</span>
-                                </div>		
-                                <img class="img-responsive shoe-left" src="images/wa.jpg" alt=" " />
-
-                                <div class="clearfix"> </div>
-                            </div>
-                        </a>
-                    </div>
+                    
+                    
                     <div class="products">
-                        <h5 class="latest-product">LATEST PRODUCTS</h5>	
-                        <a class="view-all" href="product.html">VIEW ALL<span> </span></a> 		     
+                        <h5 class="latest-product">Sản phẩm mới nhất</h5>	
+                        <a class="view-all" href="product.html">Xem tất cả<span> </span></a> 		     
                     </div>
                     <div class="product-left">
                         <div class="col-md-4 chain-grid">
-                            <a href="single.html"><img class="img-responsive chain" src="images/ch.jpg" alt=" " /></a>
+                            <a href="ProductViewServlet?MSSP=<%=plist.get(3).getMSSP()%>"><img class="img-responsive chain" src="${initParam.imgProductPath}<%=plist.get(3).getAnh()%>" alt=" " /></a>
                             <span class="star"> </span>
                             <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
+                                <h6><a href="ProductViewServlet?MSSP=<%=plist.get(3).getMSSP()%>"><%=plist.get(3).getTenSanPham()%></a></h6>
                                 <div class="star-price">
                                     <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
+                                        <span class="actual"><%=plist.get(3).getGia()%>VNĐ</span>
                                     </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
+                                    <a class="now-get get-cart" href="ProductViewServlet?MSSP=<%=plist.get(3).getMSSP()%>">Chi tiết</a> 
                                     <div class="clearfix"> </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 chain-grid">
-                            <a href="single.html"><img class="img-responsive chain" src="images/ba.jpg" alt=" " /></a>
+                            <a href="ProductViewServlet?MSSP=<%=plist.get(4).getMSSP()%>"><img class="img-responsive chain" src="${initParam.imgProductPath}<%=plist.get(4).getAnh()%>" alt=" " /></a>
                             <span class="star"> </span>
                             <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
+                                <h6><a href="ProductViewServlet?MSSP=<%=plist.get(4).getMSSP()%>"><%=plist.get(4).getTenSanPham()%></a></h6>
                                 <div class="star-price">
                                     <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
+                                        <span class="actual"><%=plist.get(4).getGia()%>VNĐ</span>
                                     </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
+                                    <a class="now-get get-cart" href="ProductViewServlet?MSSP=<%=plist.get(4).getMSSP()%>">Chi tiết</a> 
                                     <div class="clearfix"> </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 chain-grid grid-top-chain">
-                            <a href="single.html"><img class="img-responsive chain" src="images/bo.jpg" alt=" " /></a>
+                            <a href="ProductViewServlet?MSSP=<%=plist.get(5).getMSSP()%>"><img class="img-responsive chain" src="${initParam.imgProductPath}<%=plist.get(5).getAnh()%>" alt=" " /></a>
                             <span class="star"> </span>
                             <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
+                                <h6><a href="ProductViewServlet?MSSP=<%=plist.get(5).getMSSP()%>"><%=plist.get(5).getTenSanPham()%></a></h6>
                                 <div class="star-price">
                                     <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
+                                        <span class="actual"><%=plist.get(5).getGia()%>VNĐ</span>
                                     </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="products">
-                        <h5 class="latest-product">LATEST PRODUCTS</h5>	
-                        <a class="view-all" href="product.html">VIEW ALL<span> </span></a> 		     
-                    </div>
-                    <div class="product-left">
-                        <div class="col-md-4 chain-grid">
-                            <a href="single.html"><img class="img-responsive chain" src="images/bott.jpg" alt=" " /></a>
-                            <span class="star"> </span>
-                            <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
-                                <div class="star-price">
-                                    <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
-                                    </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 chain-grid">
-                            <a href="single.html"><img class="img-responsive chain" src="images/bottle.jpg" alt=" " /></a>
-                            <span class="star"> </span>
-                            <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
-                                <div class="star-price">
-                                    <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
-                                    </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 chain-grid grid-top-chain">
-                            <a href="single.html"><img class="img-responsive chain" src="images/baa.jpg" alt=" " /></a>
-                            <span class="star"> </span>
-                            <div class="grid-chain-bottom">
-                                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
-                                <div class="star-price">
-                                    <div class="dolor-grid"> 
-                                        <span class="actual">300$</span>
-                                        <span class="reducedfrom">400$</span>
-                                        <span class="rating">
-                                            <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-                                            <label for="rating-input-1-5" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-                                            <label for="rating-input-1-4" class="rating-star1"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-                                            <label for="rating-input-1-3" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-                                            <label for="rating-input-1-2" class="rating-star"> </label>
-                                            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-                                            <label for="rating-input-1-1" class="rating-star"> </label>
-                                        </span>
-                                    </div>
-                                    <a class="now-get get-cart" href="#">ADD TO CART</a> 
+                                    <a class="now-get get-cart" href="ProductViewServlet?MSSP=<%=plist.get(5).getMSSP()%>">Chi tiết</a> 
                                     <div class="clearfix"> </div>
                                 </div>
                             </div>
